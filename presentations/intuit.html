@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+	<meta charset="utf-8">
+
+	<title>ARIA 1.1 and Beyond</title>
+
+	<meta name="description" content="ARIA 1.1 and Beyond">
+	<meta name="author" content="James Nurthen">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css" id="theme">
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+    <style>
+	.reveal .larger {
+	font-size: 150%;
+	}
+	</style>
+	<script src="js/jquery-2.2.3.min.js"></script>
+		    <!-- Printing and PDF exports -->
+	    <script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	    </script>
+
+	    <!--[if lt IE 9]>
+	    <script src="lib/js/html5shiv.js"></script>
+	    <![endif]-->
+		
+	</head>
+
+	<body>
+
+	    <div class="reveal">
+		<div class="slides">
+		    <section>
+			<h1>ARIA 1.1 and Beyond</h1>
+			<p><a style="color:#FFFFFF;" href="mailto:james.nurthen@oracle.com">James Nurthen</a></p>
+
+			<p>@jnurthen</p>
+		    </section>
+			<section>
+			<H1>About Me</H1>
+			<ul><li>Worked at Oracle for a long time....</li>
+			<li>Oracle's A11y person at W3C</li>
+			<li>Co-Editor of ARIA Authoring Practices Guide</li>
+			</section>
+			<section>
+			<ul><li>ARIA 1.0</li>
+			<ul><li>Reached Recommendation March 2014</li></ul>
+			<li>ARIA 1.1
+				<ul><li>Quick</li>
+				<li>Close Gaps</li>
+				<li>Bugfixes</li>
+				</ul>
+				<li>ARIA Modules
+				<ul><li>Graphics Module</li>
+				<li>DPUB Module</li>
+				</ul>
+				<li>ARIA 2.0</li>
+				</ul>			
+			</section>
+			<section>
+			<h1>The Easy Stuff</h1>
+			<h2>New Roles</h2>
+			</section>
+			<section>
+			<figure>
+			    <img src="images/noneofabove.jpg" alt="Voting form with 'None of Above' checked">
+				</figure>
+			</section>
+			<section>
+			<code class="livecoding xml larger" contenteditable data-trim>role="none"</code>
+			<p>=</p>
+			<code class="livecoding xml larger" contenteditable data-trim>role="presentation"</code>
+			</section>
+			<section>
+			<figure>
+				<img height="600px" src="images/switch.jpg" alt="A lightswitch">
+				<cite><a href="https://www.flickr.com/photos/deanhochman/21063465192">Image Source</a></cite>
+				</figure>
+			</section>
+			<section>
+			<code class="livecoding xml larger" contenteditable data-trim>&lt;div role="switch checkbox" aria-checked="true"></code>
+			</section>
+			<section>
+			<H1>Equivalents to HTML roles</H1>
+			<dl><dt><code class="larger">role="term"</code></dt><dd><code class="larger">dt</code></dd>
+			<dt><code class="larger">role="searchbox"</code></dt><dd><code class="larger">input[type="search"]</code></dd>
+			<dt><code class="larger">role="figure"</code></dt><dd><code class="larger">figure</code></dd>
+			<dt><code class="larger">role="password"</code></dt><dd><code class="larger">input[type="password"]</code></dd>
+			</dl>
+			</section>
+			<section>
+			<figure>
+			<img src="">
+			<cite></cite>
+			
+			</section>
+			<section>
+			<pre><code class="livecoding xml larger" contenteditable data-trim>&ltdiv role="feed">
+	&lt;article>Story 1&lt;/article>
+	&lt;article>Story 2&lt;/article>
+&lt;/div></code></pre>
+            <a href="https://www.w3.org/TR/wai-aria-1.1/#feed">Feed Role</a>
+ 
+			</section>
+			<section>
+			<figure>
+			<img height="600px" src="images/tables.jpg" alt="4 Outdoor tables with a few chairs">
+			<cite><a href="http://www.publicdomainpictures.net/view-image.php?image=33233&picture=tables-and-chairs">Image Source</a></cite>
+			</figure>
+			</section>
+			<section>
+			<p><code>role="table" , role="cell"</code></p>
+			<pre><code class="livecoding xml larger" contenteditable data-trim>&ltdiv role="table">
+  &lt;div role="row">
+    &lt;div role="columnheader">Header 1&lt;/div>
+    &lt;div role="columnheader">Header 2&lt;/div>
+  &lt;/div>
+  &lt;div role="row">
+    &lt;div role="cell">Cell 1&lt;/div>
+    &lt;div role="cell">Cell 2&lt;/div>
+  &lt;/div>
+&lt;/div></code></pre>
+			</section>
+			<section>
+			<h2>And some new Properties</h2>
+			<ul><li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-colcount">aria-colcount</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-colindex">aria-colindex</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-colspan">aria-colspan</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-rowcount">aria-rowcount</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-rowindex">aria-rowindex</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-rowspan">aria-rowspan</a></li>
+			</ul>
+			<p>Also - new magic value of aria-colcount, aria-rowcount & aria-setsize of -1</p>
+			</section>
+			<section>
+			<figure>
+			<img height="600px" src="images/pizza_whole.png" alt="A yummy pepperoni pizza">
+			<cite><a href="https://commons.wikimedia.org/wiki/Category:Pepperoni_pizzas#/media/File:Pepperoni_pizza_(2).png">Image Source</a></cite>
+			</figure>			
+			</section>
+			<section>
+			<style>
+			.rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:3em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+}
+
+.rating:not(:checked) > label:before {
+    content: url('images/pizza_slice.png');
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+   /* color: gold;*/
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+			</style>
+<fieldset>
+    <legend>Bill has 5 slices of pizza. He gives 2 slices to Mary. How many slices does he have left?</legend>
+    <span class="rating">
+      <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+      <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
+      <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
+      <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+      <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+    </span>
+  </fieldset>
+			</section>
+			<section>
+<h2>Thanks</h2>
+<h3>Questions?</h3>
+<a href="https://twitter.com/jnurthen">@jnurthen</a>
+</section>
+	</div>
+	<div class="copyright" aria-hidden="true">
+	<span class="copyrighttext">
+	</span>
+	</div>
+	</div>
+
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+		slideNumber: true,
+		overview: true,
+		transition: 'zoom-in',
+		width: 1280,
+		height: 720,
+		//viewDistance: 1,				// none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{src: 'lib/js/classList.js', condition: function () {
+				return !document.body.classList;
+			}},
+			{src: 'plugin/markdown/marked.js', condition: function () {
+				return !!document.querySelector('[data-markdown]');
+			}},
+			{src: 'plugin/markdown/markdown.js', condition: function () {
+				return !!document.querySelector('[data-markdown]');
+			}},
+			{src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+				hljs.initHighlightingOnLoad();
+			}},
+			{src: 'plugin/zoom-js/zoom.js', async: true},
+			{src: 'plugin/notes/notes.js', async: true},
+			//{ src: 'plugin/details/logifill-details.js', async: true },					
+			{src: 'plugin/live-coding/live-coding.js', async: true, condition: function () {
+				return !!document.body.classList;
+			}}
+		]
+		});
+
+	</script>
+
+	</body>
+	</html>

@@ -1,0 +1,96 @@
+ARIA 1.1
+
+aria-readonly on more things (checkbox, combobox, listbox, radiogroup, slider, spinbutton)
+aria-orientation on more things
+
+aria-errormessage
+
+aria-modal
+
+aria-current
+
+aria-setsize (-1 = unknown)
+
+aria-details
+
+aria-haspopup now says what type of popup will be launched
+
+comboboxes can "control" trees and dialogs
+
+aria-activedescendent available on application
+
+aria-posinset aria-setsize available onb tabs (equivalents on tables)
+
+aria-placeholder
+
+aria-keyshortcuts
+
+aria-roledescription
+
+aria-level required on heading role
+
+new roles
+	figure
+	feed
+	(password
+	text)
+	cell
+	table
+
+dpub stuff
+graphics stuff	
+	
+region is a landmark if labelled	
+	
+Application is now a structure not a landmark
+
+Removed - aria-grabbed, aria-dropeffect, (aria-describedat)
+
+
+	
+	Images
+	Coffee - https://www.flickr.com/photos/infomastern/14956851150/
+	Beer - https://commons.wikimedia.org/wiki/File:Ale_Bitter.jpg
+	Empty beer - https://commons.wikimedia.org/wiki/File:Pint_Glass_with_some_beer.jpg
+	
+	
+Photo of Beer
+Photo of Cup of Tea
+Photo of Cup of Coffee
+
+ARIA 1.0 - role = "drink"
+aria-label = "bitter" , "tea", "coffee"
+aria-describedby -> "A sweet zesty aroma with subtle fruits and gentle baked apples flavour leading to a warming finish that leaves you wanting more!
+Colour: Warm Evening Sun"
+
+Problem..... Should out label be the type of drink or are these distinct enough "things" that the role should be different?
+
+Cue - aria-roledescription 
+Allows us to add
+aria-roledescription = "bitter" ,"tea", "coffee"
+label - glass, cup, cup ??
+
+aria-describedby.... problem?
+What happens when we also need an error message
+
+aria-errormessage - 
+
+More realistic example
+
+Pizza
+
+SVG charts , role="application" aria-roledescription="Pie Chart", "Scatter Chart", "etc etc"
+
+
+
+
+
+ARIA Authoring Practices Guide
+	Thorough review of each design pattern
+	Examples for each design pattern
+	Additional Landmarks Design
+	
+
+
+	
+
