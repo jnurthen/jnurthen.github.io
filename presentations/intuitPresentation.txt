@@ -1,51 +1,18 @@
 ARIA 1.1
 
-aria-readonly on more things (checkbox, combobox, listbox, radiogroup, slider, spinbutton)
-aria-orientation on more things
-
-aria-errormessage
-
-aria-modal
-
-aria-current
-
-aria-setsize (-1 = unknown)
-
-aria-details
-
-aria-haspopup now says what type of popup will be launched
 
 comboboxes can "control" trees and dialogs
 
-aria-activedescendent available on application
-
-aria-posinset aria-setsize available onb tabs (equivalents on tables)
-
-aria-placeholder
-
 aria-keyshortcuts
-
-aria-roledescription
 
 aria-level required on heading role
 
 new roles
-	figure
-	feed
-	(password
-	text)
-	cell
-	table
+	(text)
 
 dpub stuff
 graphics stuff	
 	
-region is a landmark if labelled	
-	
-Application is now a structure not a landmark
-
-Removed - aria-grabbed, aria-dropeffect, (aria-describedat)
-
 
 	
 	Images

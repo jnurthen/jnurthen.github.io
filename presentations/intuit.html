@@ -22,6 +22,56 @@
 	font-size: 150%;
 	}
 	</style>
+	<script>
+	    function myButtonEventHandler(event) {
+		var type = event.type;
+// Grab the keydown and click events
+		if (type === 'keydown') {
+// If either enter or space is pressed, execute the funtion
+		    if (event.keyCode === 13 || event.keyCode === 32) {
+			alert("Keyboard Activation");
+			event.preventDefault();
+		    }
+		} else if (type === 'click') {
+		    alert("Mouse Activation");
+		}
+	    }
+	</script>
+	<style>
+	    div.sample .button{
+		background-color: #e4e8ea;
+		background-image: linear-gradient(to bottom, #fff 0%, #f1f3f4 3.64%, #e8ebed 50%, #e4e8ea 100%);
+		border-color: #c4ced7;
+		color: #000;
+		font-weight: bold;
+		border-radius: 2px;
+		box-sizing: border-box;
+		display: inline-block;
+		font-family: inherit;
+		font-size: 1rem;
+		height: 2.286rem;
+		line-height: 2.286rem;
+		margin-bottom: 4px;
+		padding: 0;
+		text-align: center;
+		vertical-align: middle;
+		white-space: nowrap;
+	    }
+	    div.sample .button span
+	    {
+		padding: 0 0.857rem;
+	    }
+	    .editbutton {
+		background-image: url("images/icon.png");
+		width: 48px;
+		height: 48px;
+		display: inline-block;
+		background-repeat: no-repeat;
+		background-position: top left;
+		background-size: 100%;
+	    </style>	
+	
+	
 	<script src="js/jquery-2.2.3.min.js"></script>
 		    <!-- Printing and PDF exports -->
 	    <script>
@@ -70,7 +120,164 @@
 				</ul>			
 			</section>
 			<section>
-			<h1>The Easy Stuff</h1>
+			<h1>WAI-ARIA 1.0</h1>
+			<h2>< 5 minute intro</h2>
+			</section>
+			<section>
+			    <h2>Fake Buttons</h2>
+			    <script>
+				function doClick() {
+				    alert("Pressed the button");
+				}
+				function doKeyPress() {
+
+				}
+			    </script>
+			    <pre><code class="liveCoding xml" data-livecoding-id="realbutton" data-trim contenteditable>
+						<button class="button" onclick="doClick()">
+	<span>My Real Button</span>
+</button>
+						</code></pre>
+			    <div class="sample" id="realbutton"></div>
+			    <pre><code class="liveCoding xml" data-livecoding-id="myfakebutton" data-trim contenteditable>
+						<div class="button" onclick="doClick()">
+	<span>My Fake Button</span>
+</div>
+						</code></pre>
+			    <div class="sample" id="myfakebutton"></div>
+			    <p class="fragment">But What about Keyboard users?</p>
+			</section>
+			<section>
+			    <h2>Fake Buttons</h2>
+
+			    <pre><code class="liveCoding xml" data-livecoding-id="myfakebutton2" data-trim contenteditable>
+						<div class="button" id="mybutton" tabindex=0
+onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
+	<span>My Fake Button</span>
+</div>
+						</code></pre>
+			    <div class="sample" id="myfakebutton2"></div>
+			    <p class="fragment">But What about Screen Reader users?</p>
+			</section>	
+			<section>
+			    <h2>Fake Buttons</h2>
+
+			    <pre><code class="liveCoding xml" data-trim contenteditable>
+						<div role="button" class="button" id="mybutton" tabindex=0 
+onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
+	<span>My Fake Button</span>
+</div>
+						</code></pre>
+
+			    <ul><li>Need to Expose the “Role” (and any states and properties) for an element
+				<li>Here this is a “button” or a “push button”
+			    </ul>
+
+			</section>	
+			<section>
+			    <h2>WAI-ARIA Introduction</h2>
+			    <p>ARIA defines attributes to convey:</p>
+			    <dl>	<dt>Role</dt><dd>What is this? (e.g. button, tab, treeitem)</dd>
+				<dt>States</dt><dd>What condition it is in (e.g. Pressed, disabled) </dd>
+				<dt>Properties</dt><dd>Any other information about the item (e.g. position in a set of values)</dd>
+				<dt>Name</dt><dd>What is the specific name of the item (e.g. Employee Name)</dd>
+			    </dl>
+
+			</section>
+			<section data-transition="zoom-in fade-out">
+					<div class="float-left" style="font-size: 0.6em;">
+						<h2>Landmark roles</h2>
+						<ul>
+							<li><code>banner</code></li>
+							<li><code>complementary</code></li>
+							<li><code>contentinfo</code></li>
+							<li><code>form</code></li>
+							<li><code>main</code></li>
+							<li><code>navigation</code></li>
+							<li><code>search</code></li>
+						</ul>
+						<p style="margin-top: 150px; text-align: right;"><a href="http://www.w3.org/TR/wai-aria/">http://www.w3.org/TR/wai-aria/</a></p>
+					</div>
+								<div  class="float-right"style="font-size: 0.6em;">
+						<h2>Document structure roles</h2>
+						<ul>
+							<li><code>article</code></li>
+							<li><code>columnheader</code></li>
+							<li><code>definition</code></li>
+							<li><code>directory</code></li>
+							<li><code>document</code></li>
+							<li><code>group</code></li>
+							<li><code>heading</code></li>
+							<li><code>img</code></li>
+							<li><code>list</code></li>
+							<li><code>listitem</code></li>
+							<li><code>math</code></li>
+							<li><code>note</code></li>
+							<li><code>presentation</code></li>
+							<li><code>region</code></li>
+							<li><code>row</code></li>
+							<li><code>rowheader</code></li>
+							<li><code>separator</code></li>
+							<li><code>toolbar</code></li>
+						</ul>
+					</div>
+			</section>
+					<section data-transition="zoom-in fade-out" style="top: 0px; display: block;" >
+					<div class="float-left" style="width: 50%; font-size: 0.6em;">
+						<h2>Standalone widget roles</h2>
+						<ul style="float: left; margin-right: 60px;">
+							<li><code>alert</code></li>
+							<li><code>alertdialog</code></li>
+							<li><code>button</code></li>
+							<li><code>checkbox</code></li>
+							<li><code>dialog</code></li>
+							<li><code>gridcell</code></li>
+							<li><code>link</code></li>
+							<li><code>log</code></li>
+							<li><code>marquee</code></li>
+							<li><code>menuitem</code></li>
+							<li><code>menuitemcheckbox</code></li>
+							<li><code>menuitemradio</code></li>
+							<li><code>option</code></li>
+						</ul>
+						<ul style="float: left;">
+							<li><code>progressbar</code></li>
+							<li><code>radio</code></li>
+							<li><code>scrollbar</code></li>
+							<li><code>slider</code></li>
+							<li><code>spinbutton</code></li>
+							<li><code>status</code></li>
+							<li><code>tab</code></li>
+							<li><code>tabpanel</code></li>
+							<li><code>textbox</code></li>
+							<li><code>timer</code></li>
+							<li><code>tooltip</code></li>
+							<li><code>treeitem</code></li>
+						</ul>
+					</div>
+					<div class="float-right" style=" width: 40%; font-size: 0.6em;">
+						<h2>Composite widget roles</h2>
+						<ul>
+							<li><code>combobox</code></li>
+							<li><code>grid</code></li>
+							<li><code>listbox</code></li>
+							<li><code>menu</code></li>
+							<li><code>menubar</code></li>
+							<li><code>radiogroup</code></li>
+							<li><code>tablist</code></li>
+							<li><code>tree</code></li>
+							<li><code>treegrid</code></li>
+						</ul>
+					</div>
+					<p style="padding-top: 80px; clear: left;"><a href="http://www.w3.org/TR/wai-aria/roles#widget_roles">http://www.w3.org/TR/wai-aria/roles#widget_roles</a></p>
+				</section>
+			<section>
+			<h1>WAI-ARIA 1.0</h1>
+			<h2>Was it < 5 minutes?</h2>
+            </section>	
+			<section>
+			
+			<h1>WAI-ARIA 1.1 - The Easy Stuff</h1>
 			<h2>New Roles</h2>
 			</section>
 			<section>
@@ -215,6 +422,74 @@
     </span>
   </fieldset>
 			</section>
+			<section>
+			<h2>aria-roledescription</h2>
+			<ul><li>More specific version of a common widget</li>
+			<li>A "new" widget without any known convention for how to operate</li>
+			</ul>
+			</section>
+			<section>
+			<figure>
+			<img height="600px" src="images/landmarks.jpg" alt="A signpost in London directing to a bunch of different landmarks">
+			<cite><a href="https://en.wikipedia.org/wiki/List_of_tourist_attractions_in_the_City_of_Westminster#/media/File:Signpost_on_Parliament_Square,_London.jpg">Image Source</a></cite>
+			</figure>	
+			
+			</section>
+			<section>
+			<p>&lt;del>role=application&lt;del></p>
+			<p>&lt;ins>role=region&lt;/ins></p>
+			<aside class="notes">
+        role=application is no longer a landmark. It is now a widget - so can act as the basis for any widgets which don't have an appropriate aria role. Very useful in combination with aria-roledescription and the fact that aria-acticedescendent is now allowed on applications.
+		Region is only a landmark if it has a "label" using aria-label or aria-labelledby.
+            </aside>
+			</section>
+			<section>
+			<img class="stretch" src="images/aria-errormessage-hint.png" alt="Form Field with hint text showing">
+			</section>
+			<section>
+			<img class="stretch" src="images/aria-errormessage-error.png" alt="Form Field with hint text and an error message showing">
+			<p class="fragment"><code>aria-errormessage</code></p>
+			</section>
+			<section>
+			<h1>Some other miscellaneous changes</h1>
+			<ul><li>aria-modal</li>
+			<li>aria-details</li>
+			<li>aria-placeholder</li>
+			<li>aria-haspopup (new values)</li>
+			<li>aria-current</li>
+			<li>aria-readonly, aria-orientation, aria-posinset, aria-setsize (on more roles)</li>
+			<li><del>aria-grabbed, aria-dropeffect, (aria-describedat)</del></li>
+			</section>
+			<section>
+			<h1>What is next?</h1>
+			
+			</section>
+			<section>
+			<h1>Modules</h1>
+			<h2>Graphics</h2>
+			<h2>Digital Publishing</h2>
+			
+			</section>
+			<section>
+			<h1>ARIA 2.0</h1>
+			<h2>Design Patterns</h2>
+			<h2>Potentially integrating (some) of the Modules</h2>
+			</section>
+			<section>
+			<h1>Authoring Practices Guide (APG)</h1>
+			<ul><li>Integrate old Primer (where still relevant)</li>
+			<li>Review all the Design Patterns</li>
+			<li>Create Hosted (vanilla) examples for all design patterns (help needed!!)</li>
+			<li>Fix anything incorrect</li></ul>
+			</section>
+			<section>
+			<h1>Authoring Practices Guide (APG)</h1>
+			<h2>How can you help?</h2>
+			<ul><li>Create Example code</li>
+			<li>Log Issues</li>
+			<li>Submit PRs for open issues</li>
+			<li>All on github https://github.com/w3c/aria-practices</li></ul>
+			</section>			
 			<section>
 <h2>Thanks</h2>
 <h3>Questions?</h3>

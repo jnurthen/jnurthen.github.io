@@ -342,3 +342,10 @@ body {
     break-after: always; /* New syntax */
 
 }
+
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
