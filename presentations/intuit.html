@@ -107,16 +107,16 @@
 			<section>
 			<ul><li>ARIA 1.0</li>
 			<ul><li>Reached Recommendation March 2014</li></ul>
-			<li>ARIA 1.1
+			<li class="fragment">ARIA 1.1
 				<ul><li>Quick</li>
 				<li>Close Gaps</li>
 				<li>Bugfixes</li>
 				</ul>
-				<li>ARIA Modules
+				<li class="fragment">ARIA Modules
 				<ul><li>Graphics Module</li>
 				<li>DPUB Module</li>
 				</ul>
-				<li>ARIA 2.0</li>
+				<li class="fragment">ARIA 2.0</li>
 				</ul>			
 			</section>
 			<section>
@@ -222,7 +222,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 						</ul>
 					</div>
 			</section>
-					<section data-transition="zoom-in fade-out" style="top: 0px; display: block;" >
+				<section data-transition="zoom-in fade-out" style="top: 0px; display: block;" >
 					<div class="float-left" style="width: 50%; font-size: 0.6em;">
 						<h2>Standalone widget roles</h2>
 						<ul style="float: left; margin-right: 60px;">
@@ -286,9 +286,8 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 				</figure>
 			</section>
 			<section>
-			<code class="livecoding xml larger" contenteditable data-trim>role="none"</code>
-			<p>=</p>
-			<code class="livecoding xml larger" contenteditable data-trim>role="presentation"</code>
+			<h2>role="none"</h2>
+			<p>= <code class="livecoding xml larger" contenteditable data-trim>role="presentation"</code>
 			</section>
 			<section>
 			<figure>
@@ -297,6 +296,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 				</figure>
 			</section>
 			<section>
+			<h2>role="switch"</h2>
 			<code class="livecoding xml larger" contenteditable data-trim>&lt;div role="switch checkbox" aria-checked="true"></code>
 			</section>
 			<section>
@@ -308,17 +308,35 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			</dl>
 			</section>
 			<section>
-			<a class="twitter-timeline"  href="https://twitter.com/hashtag/a11y" data-widget-id="747197086173519872">#a11y Tweets</a>
-        
+			<figure>
+				<div class="float-left"><img height="800px" src="images/twitterfeed.png" alt="A Twitter feed"></div>
+
+			</figure>        
 			
 			</section>
 			<section>
+			<h2>role="feed"</h2>
 			<pre><code class="livecoding xml larger" contenteditable data-trim>&ltdiv role="feed">
-	&lt;article>Story 1&lt;/article>
-	&lt;article>Story 2&lt;/article>
+	&lt;article tabindex="-1">Story 1&lt;/article>
+	&lt;article tabindex="-1">Story 2&lt;/article>
+	&lt;article tabindex="-1">Story 3&lt;/article>
+	&lt;article tabindex="-1">Story 4&lt;/article>
+	
 &lt;/div></code></pre>
-            <a href="https://www.w3.org/TR/wai-aria-1.1/#feed">Feed Role</a>
- 
+<ul><li>AT "signals" browser where virtual cursor is.</li>
+            <li><a href="https://www.w3.org/TR/wai-aria-1.1/#feed">Feed Role</a></li>
+			</ul> 
+			</section>
+			<section>
+			<h2>role="text"</h2>
+			<pre><code><span role="text" aria-label="3 of 5 stars">★★★☆☆</span></code></pre>
+			<pre><code><div class="plan_cost" role="text" aria-label="US$19.99/mo">
+	<span class="superscript">US$</span>
+	19
+	<span class="superscript cents">99</span>
+	<span class="per_month">/mo</span>
+</div></code></pre>
+			
 			</section>
 			<section>
 			<figure>
@@ -327,7 +345,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			</figure>
 			</section>
 			<section>
-			<p><code>role="table" , role="cell"</code></p>
+			<h2>role="table" , role="cell"</h2>
 			<pre><code class="livecoding xml larger" contenteditable data-trim>&ltdiv role="table">
   &lt;div role="row">
     &lt;div role="columnheader">Header 1&lt;/div>
@@ -349,6 +367,17 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-rowspan">aria-rowspan</a></li>
 			</ul>
 			<p>Also - new magic value of aria-colcount, aria-rowcount & aria-setsize of -1</p>
+			</section>
+			<section>
+			<h2>Comboboxes</h2>
+			<p>Trees, Dialogs, Grid or Listbox</p>
+			<pre contenteditable><code><div aria-label="Tag" role="combobox" aria-expanded="true" aria-owns="owned_listbox" aria-haspopup="listbox">
+    <input type="text" aria-autocomplete="list" aria-controls="owned_listbox" aria-activedescendant="selected_option">
+</div>
+<ul role="listbox" id="owned_listbox">
+    <li role="option">Zebra</li>
+    <li role="option" id="selected_option">Zoom</li>
+</ul></code></pre>
 			</section>
 			<section>
 			<figure>
@@ -381,6 +410,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
     font-size:200%;
     line-height:1.2;
     color:#ddd;
+	opacity: 0.2;
 }
 
 .rating:not(:checked) > label:before {
@@ -389,6 +419,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 
 .rating > input:checked ~ label {
     color: #f70;
+	opacity: 1;
 }
 
 .rating:not(:checked) > label:hover,
@@ -414,8 +445,8 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
     <legend>Bill has 5 slices of pizza. He gives 2 slices to Mary. How many slices does he have left?</legend>
     <span class="rating">
       <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
-      <input type="radio" id="rating-4" name="rating" value="4" checked="checked" /><label for="rating-4">4</label>
-      <input type="radio" id="rating-3" name="rating" value="3" /><label for="rating-3">3</label>
+      <input type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4">4</label>
+      <input type="radio" id="rating-3" name="rating" value="3" checked="checked" /><label for="rating-3">3</label>
       <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
       <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
     </span>
@@ -446,12 +477,14 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<img class="stretch" src="images/aria-errormessage-hint.png" alt="Form Field with hint text showing">
 			</section>
 			<section>
+			<h2><code>aria-errormessage</code></h2>
+			
 			<img class="stretch" src="images/aria-errormessage-error.png" alt="Form Field with hint text and an error message showing">
-			<p class="fragment"><code>aria-errormessage</code></p>
 			</section>
 			<section>
 			<h1>Some other miscellaneous changes</h1>
 			<ul><li>aria-modal</li>
+			<li>aria-keyshortcuts</li>
 			<li>aria-details</li>
 			<li>aria-placeholder</li>
 			<li>aria-haspopup (new values)</li>
@@ -467,7 +500,10 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<h1>Modules</h1>
 			<h2>Graphics</h2>
 			<h2>Digital Publishing</h2>
-			
+			<aside class="notes">
+			Graphics introduces 3 new roles graphics-doc, graphics-object, graphics-symbol
+			DPub introduces a lot of roles like bibliography, credits, foreward, index etc. See the spec for details.
+			</aside>
 			</section>
 			<section>
 			<h1>ARIA 2.0</h1>
@@ -488,7 +524,14 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<li>Log Issues</li>
 			<li>Submit PRs for open issues</li>
 			<li>All on github https://github.com/w3c/aria-practices</li></ul>
-			</section>			
+			</section>
+<section>
+<h2>More Information</h2>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/">ARIA 1.1 (Working Draft)</a></p>
+<p><a href="https://www.w3.org/TR/wai-aria-practices-1.1/">ARIA 1.1 Authoring Practices(Working Draft)</a></p>
+<p><a href="https://www.w3.org/TR/graphics-aria-1.0/">WAI-ARIA Graphics Module 1.0 (Working Draft)</a></p>
+<p><a href="https://www.w3.org/TR/dpub-aria-1.0/">Digital Publishing ARIA 1.0 Module (Working Draft)</a></p>
+</section>			
 			<section>
 <h2>Thanks</h2>
 <h3>Questions?</h3>
@@ -543,8 +586,6 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			}}
 		]
 		});
-
-	</script>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </script>
 	</body>
 	</html>

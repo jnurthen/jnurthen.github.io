@@ -3,16 +3,8 @@ ARIA 1.1
 
 comboboxes can "control" trees and dialogs
 
-aria-keyshortcuts
-
-aria-level required on heading role
-
 new roles
 	(text)
-
-dpub stuff
-graphics stuff	
-	
 
 	
 	Images
