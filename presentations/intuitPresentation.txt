@@ -3,9 +3,6 @@ ARIA 1.1
 
 comboboxes can "control" trees and dialogs
 
-new roles
-	(text)
-
 	
 	Images
 	Coffee - https://www.flickr.com/photos/infomastern/14956851150/
