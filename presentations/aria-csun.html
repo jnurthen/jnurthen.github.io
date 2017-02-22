@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+	<meta charset="utf-8">
+
+	<title>What is new in ARIA 1.1 and the Authoring Practices Guide</title>
+
+	<meta name="description" content="What is new in ARIA 1.1 and the Authoring Practices Guide">
+	<meta name="author" content="James Nurthen">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css" id="theme">
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+    <style>
+	.reveal .larger {
+	font-size: 150%;
+	}
+	</style>
+	<script>
+	    function myButtonEventHandler(event) {
+		var type = event.type;
+// Grab the keydown and click events
+		if (type === 'keydown') {
+// If either enter or space is pressed, execute the funtion
+		    if (event.keyCode === 13 || event.keyCode === 32) {
+			alert("Keyboard Activation");
+			event.preventDefault();
+		    }
+		} else if (type === 'click') {
+		    alert("Mouse Activation");
+		}
+	    }
+	</script>
+	<style>
+	    div.sample .button{
+		background-color: #e4e8ea;
+		background-image: linear-gradient(to bottom, #fff 0%, #f1f3f4 3.64%, #e8ebed 50%, #e4e8ea 100%);
+		border-color: #c4ced7;
+		color: #000;
+		font-weight: bold;
+		border-radius: 2px;
+		box-sizing: border-box;
+		display: inline-block;
+		font-family: inherit;
+		font-size: 1rem;
+		height: 2.286rem;
+		line-height: 2.286rem;
+		margin-bottom: 4px;
+		padding: 0;
+		text-align: center;
+		vertical-align: middle;
+		white-space: nowrap;
+	    }
+	    div.sample .button span
+	    {
+		padding: 0 0.857rem;
+	    }
+	    .editbutton {
+		background-image: url("images/icon.png");
+		width: 48px;
+		height: 48px;
+		display: inline-block;
+		background-repeat: no-repeat;
+		background-position: top left;
+		background-size: 100%;
+	    </style>	
+	
+	
+	<script src="js/jquery-2.2.3.min.js"></script>
+		    <!-- Printing and PDF exports -->
+	    <script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	    </script>
+
+	    <!--[if lt IE 9]>
+	    <script src="lib/js/html5shiv.js"></script>
+	    <![endif]-->
+		
+	</head>
+
+	<body>
+
+	    <div class="reveal">
+		<div class="slides">
+		    <section>
+			<h1>What is new in ARIA 1.1 and the Authoring Practices Guide</h1>
+			<h2>CSUN 2017</h2>
+			<p>March 1, 2017</p>
+			<p><a style="color:#FFFFFF;" href="mailto:james.nurthen@oracle.com">James Nurthen</a></p>
+            <p><a href="https://jnurthen.github.io/presentations/aria-11.html#/">https://jnurthen.github.io/presentations/aria-csun.html#/</a></p>
+			<p>Twitter: <a href="https://twitter.com/jnurthen">@jnurthen</a></p>
+		    </section>
+			<section>
+			<H1>About Me</H1>
+			<ul><li>Worked at Oracle for a long time....</li>
+			<li>Accessibility for 10+ years</li>
+			<li>W3C ARIA and WCAG working groups</li>
+			<li>Co-Editor of ARIA Authoring Practices Guide</li>
+			</section>
+			<section>
+			<ul><li>ARIA 1.0</li>
+			<ul><li>Reached Recommendation March 2014</li></ul>
+			<li class="fragment">ARIA 1.1
+				<ul><li>Quick...</li>
+				<li>Close Gaps</li>
+				<li>Bugfixes</li>
+				</ul>
+				<li class="fragment">ARIA Modules
+				<ul><li>Graphics Module</li>
+				<li>DPUB Module</li>
+				</ul>
+				<li class="fragment">ARIA 1.2
+				<ul><li>Quick</li>
+				<li>HTML5 role parity</li>
+				</ul>
+				<li class="fragment">ARIA 2.0</li>
+				</ul>			
+			</section>
+			<section>
+			<h1>WAI-ARIA 1.0</h1>
+			<h2>< 5 minute intro</h2>
+			</section>
+			<section>
+			    <h2>Fake Buttons</h2>
+			    <script>
+				function doClick() {
+				    alert("Pressed the button");
+				}
+				function doKeyPress() {
+
+				}
+			    </script>
+			    <pre><code class="liveCoding xml" data-livecoding-id="realbutton" data-trim contenteditable>
+						<button class="button" onclick="doClick()">
+	<span>My Real Button</span>
+</button>
+						</code></pre>
+			    <div class="sample" id="realbutton"></div>
+			    <pre><code class="liveCoding xml" data-livecoding-id="myfakebutton" data-trim contenteditable>
+						<div class="button" onclick="doClick()">
+	<span>My Fake Button</span>
+</div>
+						</code></pre>
+			    <div class="sample" id="myfakebutton"></div>
+			    <p class="fragment">But What about Keyboard users?</p>
+			</section>
+			<section>
+			    <h2>Fake Buttons</h2>
+
+			    <pre><code class="liveCoding xml" data-livecoding-id="myfakebutton2" data-trim contenteditable>
+						<div class="button" id="mybutton" tabindex=0
+onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
+	<span>My Fake Button</span>
+</div>
+						</code></pre>
+			    <div class="sample" id="myfakebutton2"></div>
+			    <p class="fragment">But What about Screen Reader users?</p>
+			</section>	
+			<section>
+			    <h2>Fake Buttons</h2>
+
+			    <pre><code class="liveCoding xml" data-trim contenteditable>
+						<div role="button" class="button" id="mybutton" tabindex=0 
+onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
+	<span>My Fake Button</span>
+</div>
+						</code></pre>
+
+			    <ul><li>Need to Expose the “Role” (and any states and properties) for an element
+				<li>Here this is a “button” or a “push button”
+			    </ul>
+
+			</section>	
+			<section>
+			    <h2>WAI-ARIA Introduction</h2>
+			    <p>ARIA defines attributes to convey:</p>
+			    <dl>	<dt>Role</dt><dd>What is this? (e.g. button, tab, treeitem)</dd>
+				<dt>States</dt><dd>What condition it is in (e.g. Pressed, disabled) </dd>
+				<dt>Properties</dt><dd>Any other information about the item (e.g. position in a set of values)</dd>
+				<dt>Name</dt><dd>What is the specific name of the item (e.g. Employee Name)</dd>
+			    </dl>
+
+			</section>
+			<section data-transition="zoom-in fade-out">
+					<div class="float-left" style="font-size: 0.6em;">
+						<h2>Landmark roles</h2>
+						<ul>
+							<li><code>banner</code></li>
+							<li><code>complementary</code></li>
+							<li><code>contentinfo</code></li>
+							<li><code>form</code></li>
+							<li><code>main</code></li>
+							<li><code>navigation</code></li>
+							<li><code>search</code></li>
+						</ul>
+						<p style="margin-top: 150px; text-align: right;"><a href="http://www.w3.org/TR/wai-aria/">http://www.w3.org/TR/wai-aria/</a></p>
+					</div>
+								<div  class="float-right"style="font-size: 0.6em;">
+						<h2>Document structure roles</h2>
+						<ul>
+							<li><code>article</code></li>
+							<li><code>columnheader</code></li>
+							<li><code>definition</code></li>
+							<li><code>directory</code></li>
+							<li><code>document</code></li>
+							<li><code>group</code></li>
+							<li><code>heading</code></li>
+							<li><code>img</code></li>
+							<li><code>list</code></li>
+							<li><code>listitem</code></li>
+							<li><code>math</code></li>
+							<li><code>note</code></li>
+							<li><code>presentation</code></li>
+							<li><code>region</code></li>
+							<li><code>row</code></li>
+							<li><code>rowheader</code></li>
+							<li><code>separator</code></li>
+							<li><code>toolbar</code></li>
+						</ul>
+					</div>
+			</section>
+				<section data-transition="zoom-in fade-out" style="top: 0px; display: block;" >
+					<div class="float-left" style="width: 50%; font-size: 0.6em;">
+						<h2>Standalone widget roles</h2>
+						<ul style="float: left; margin-right: 60px;">
+							<li><code>alert</code></li>
+							<li><code>alertdialog</code></li>
+							<li><code>button</code></li>
+							<li><code>checkbox</code></li>
+							<li><code>dialog</code></li>
+							<li><code>gridcell</code></li>
+							<li><code>link</code></li>
+							<li><code>log</code></li>
+							<li><code>marquee</code></li>
+							<li><code>menuitem</code></li>
+							<li><code>menuitemcheckbox</code></li>
+							<li><code>menuitemradio</code></li>
+							<li><code>option</code></li>
+						</ul>
+						<ul style="float: left;">
+							<li><code>progressbar</code></li>
+							<li><code>radio</code></li>
+							<li><code>scrollbar</code></li>
+							<li><code>slider</code></li>
+							<li><code>spinbutton</code></li>
+							<li><code>status</code></li>
+							<li><code>tab</code></li>
+							<li><code>tabpanel</code></li>
+							<li><code>textbox</code></li>
+							<li><code>timer</code></li>
+							<li><code>tooltip</code></li>
+							<li><code>treeitem</code></li>
+						</ul>
+					</div>
+					<div class="float-right" style=" width: 40%; font-size: 0.6em;">
+						<h2>Composite widget roles</h2>
+						<ul>
+							<li><code>combobox</code></li>
+							<li><code>grid</code></li>
+							<li><code>listbox</code></li>
+							<li><code>menu</code></li>
+							<li><code>menubar</code></li>
+							<li><code>radiogroup</code></li>
+							<li><code>tablist</code></li>
+							<li><code>tree</code></li>
+							<li><code>treegrid</code></li>
+						</ul>
+					</div>
+					<p style="padding-top: 80px; clear: left;"><a href="http://www.w3.org/TR/wai-aria/roles#widget_roles">http://www.w3.org/TR/wai-aria/roles#widget_roles</a></p>
+				</section>
+			<section>
+			<h1>WAI-ARIA 1.0</h1>
+			<h2>Was it < 5 minutes?</h2>
+            </section>	
+			<section>
+			
+			<h1>WAI-ARIA 1.1 - The Easy Stuff</h1>
+			<h2>New Roles</h2>
+			</section>
+			<section>
+			<figure>
+			    <img src="images/noneofabove.jpg" alt="Voting form with 'None of Above' checked">
+				</figure>
+			</section>
+			<section>
+			<h2>role="none"</h2>
+			<p>= <code class="livecoding xml larger" contenteditable data-trim>role="presentation"</code>
+			</section>
+			<section>
+			<figure>
+				<img height="600px" src="images/switch.jpg" alt="A lightswitch">
+				<cite><a href="https://www.flickr.com/photos/deanhochman/21063465192">Image Source</a></cite>
+				</figure>
+			</section>
+			<section>
+			<h2>role="switch"</h2>
+			<code class="livecoding xml larger" contenteditable data-trim>&lt;div role="switch checkbox" aria-checked="true"></code>
+			<ul>
+			<li>Chrome (support)
+			</ul>
+			</section>
+			<section>
+			<H1>Equivalents to HTML roles</H1>
+			<dl><dt><code class="larger">role="term"</code></dt><dd><code class="larger">dt</code></dd>
+			<dt><code class="larger">role="searchbox"</code></dt><dd><code class="larger">input[type="search"]</code></dd>
+			<dt><code class="larger">role="figure"</code></dt><dd><code class="larger">figure</code></dd>
+			<dt style="text-decoration: line-through;"><code class="larger">role="password"</code></dt><dd style="text-decoration: line-through;"><code class="larger">input[type="password"]</code></dd>
+			</dl>
+			</section>
+			<section>
+			<figure>
+				<div class="float-left"><img height="800px" src="images/twitterfeed.png" alt="A Twitter feed"></div>
+
+			</figure>        
+			
+			</section>
+			<section>
+			<h2>role="feed"</h2>
+			<pre><code class="livecoding xml larger" contenteditable data-trim>&ltdiv role="feed">
+	&lt;article tabindex="-1">Story 1&lt;/article>
+	&lt;article tabindex="-1">Story 2&lt;/article>
+	&lt;article tabindex="-1">Story 3&lt;/article>
+	&lt;article tabindex="-1">Story 4&lt;/article>
+	
+&lt;/div></code></pre>
+<ul><li>AT "signals" browser where virtual cursor is.</li>
+            <li><a href="https://www.w3.org/TR/wai-aria-1.1/#feed">Feed Role</a></li>
+			</ul> 
+			</section>
+			<section>
+			<h2 style="text-decoration: line-through;">role="text"</h2>
+			<pre><code><span role="text" aria-label="3 of 5 stars">★★★☆☆</span></code></pre>
+			<pre><code><div class="plan_cost" role="text" aria-label="US$19.99/mo">
+	<span class="superscript">US$</span>
+	19
+	<span class="superscript cents">99</span>
+	<span class="per_month">/mo</span>
+</div></code></pre>
+			
+			</section>
+			<section>
+			<figure>
+			<img height="600px" src="images/tables.jpg" alt="4 Outdoor tables with a few chairs">
+			<cite><a href="http://www.publicdomainpictures.net/view-image.php?image=33233&picture=tables-and-chairs">Image Source</a></cite>
+			</figure>
+			</section>
+			<section>
+			<h2>role="table" , role="cell"</h2>
+			<pre><code class="livecoding xml larger" contenteditable data-trim>&ltdiv role="table">
+  &lt;div role="row">
+    &lt;div role="columnheader">Header 1&lt;/div>
+    &lt;div role="columnheader">Header 2&lt;/div>
+  &lt;/div>
+  &lt;div role="row">
+    &lt;div role="cell">Cell 1&lt;/div>
+    &lt;div role="cell">Cell 2&lt;/div>
+  &lt;/div>
+&lt;/div></code></pre>
+			</section>
+			<section>
+			<h2>And some new Properties</h2>
+			<ul><li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-colcount">aria-colcount</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-colindex">aria-colindex</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-colspan">aria-colspan</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-rowcount">aria-rowcount</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-rowindex">aria-rowindex</a></li>
+			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-rowspan">aria-rowspan</a></li>
+			</ul>
+			<p>Also - new magic value of aria-colcount, aria-rowcount & aria-setsize of -1</p>
+			<ul><li>Chrome</li>
+			</ul>
+			</section>
+			<section>
+			<h2>Comboboxes</h2>
+			<p>Trees, Dialogs, Grid or Listbox</p>
+			<pre contenteditable><code><div aria-label="Tag" role="combobox" aria-expanded="true" aria-owns="owned_listbox" aria-haspopup="listbox">
+    <input type="text" aria-autocomplete="list" aria-controls="owned_listbox" aria-activedescendant="selected_option">
+</div>
+<ul role="listbox" id="owned_listbox">
+    <li role="option">Zebra</li>
+    <li role="option" id="selected_option">Zoom</li>
+</ul></code></pre>
+<div class="float-left fragment"><img src="images/combo-date.png" alt="Combo box with A date Dialog popup"></div><div class="float-left fragment"><img src="images/combo-dialog.png" alt="Combo box with textbox search within the popup"></div>
+			</section>
+			<section>
+			<figure>
+			<img height="600px" src="images/pizza_whole.png" alt="A yummy pepperoni pizza">
+			<cite><a href="https://commons.wikimedia.org/wiki/Category:Pepperoni_pizzas#/media/File:Pepperoni_pizza_(2).png">Image Source</a></cite>
+			</figure>			
+			</section>
+			<section>
+			<style>
+			.rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:3em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+	opacity: 0.1;
+}
+
+.rating:not(:checked) > label:before {
+    content: url('images/Pizza_slice.png');
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+	opacity: 1;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+   /* color: gold;*/
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+			</style>
+<fieldset>
+    <legend>Bill has 5 slices of pizza. He gives 2 slices to Mary. How many slices does he have left?</legend>
+    <span class="rating">
+      <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+      <input type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4">4</label>
+      <input type="radio" id="rating-3" name="rating" value="3" checked="checked" /><label for="rating-3">3</label>
+      <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+      <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+    </span>
+  </fieldset>
+			</section>
+			<section>
+			<div><h2>aria-roledescription</h2>
+			<ul><li>More specific version of a common widget</li>
+			<li>A "new" widget without any known convention for how to operate</li>
+			</ul></div>
+			<div class="fragment float-left" width="40%"><img src="images/char-pie.png" alt="Pie chart." style='height: 100%; width: 100%; object-fit: contain'></div><div class="fragment float-right" width="60%"><img  src="images/char-timeline.png" alt="timeline" style='height: 100%; width: 100%; object-fit: contain'></div>
+			</section>
+			<section>
+			<figure>
+			<img height="600px" src="images/landmarks.jpg" alt="A signpost in London directing to a bunch of different landmarks">
+			<cite><a href="https://en.wikipedia.org/wiki/List_of_tourist_attractions_in_the_City_of_Westminster#/media/File:Signpost_on_Parliament_Square,_London.jpg">Image Source</a></cite>
+			</figure>	
+			
+			</section>
+			<section>
+			<p>&lt;del>role=application&lt;del></p>
+			<p>&lt;ins>role=region&lt;/ins></p>
+			<aside class="notes">
+        role=application is no longer a landmark. It is now a widget - so can act as the basis for any widgets which don't have an appropriate aria role. Very useful in combination with aria-roledescription and the fact that aria-acticedescendent is now allowed on applications.
+		Region is only a landmark if it has a "label" using aria-label or aria-labelledby.
+            </aside>
+			</section>
+			<section>
+			<img class="stretch" src="images/aria-errormessage-hint.png" alt="Form Field with hint text showing">
+			</section>
+			<section>
+			<h2><code>aria-errormessage</code></h2>
+			
+			<img class="stretch" src="images/aria-errormessage-error.png" alt="Form Field with hint text and an error message showing">
+			</section>
+			<section>
+			<h1>Some other miscellaneous changes</h1>
+			<ul><li>aria-modal</li>
+			<li>aria-keyshortcuts</li>
+			<li>aria-details</li>
+			<li>aria-placeholder</li>
+			<li>aria-haspopup (new values)</li>
+			<li>aria-current</li>
+				<ul><li>Chrome (windows, linux), Webkit (MacOS, iOS), JAWS18
+				<li>https://ljwatson.github.io/design-patterns/aria-current/
+				</ul>
+			<li>aria-readonly, aria-orientation, aria-posinset, aria-setsize (on more roles)</li>
+			<li><del>aria-grabbed, aria-dropeffect, (aria-describedat)</del></li>
+			</section>
+			
+			<section>
+			<h1>Modules</h1>
+			<h2>Graphics</h2>
+			<h2>Digital Publishing</h2>
+			<aside class="notes">
+			Graphics introduces 3 new roles graphics-doc, graphics-object, graphics-symbol
+			DPub introduces a lot of roles like bibliography, credits, foreward, index etc. See the spec for details.
+			</aside>
+			</section>
+			<section>
+			<h1>What is next?</h1>
+			</section>
+			<section>
+			<h1>ARIA 2.0</h1>
+			<h2>Design Patterns</h2>
+			<h2>Potentially integrating (some) of the Modules</h2>
+			</section>
+			<section>
+			<h1>Authoring Practices Guide (APG)</h1>
+			<ul><li>Integrate old Primer (where still relevant)</li>
+			<li>Review all the Design Patterns</li>
+			<li>Create Hosted (vanilla) examples for all design patterns (help needed!!)</li>
+			<li>Fix anything incorrect</li></ul>
+			</section>
+			<section>
+			<h1>Authoring Practices Guide (APG)</h1>
+			<h2>How can you help?</h2>
+			<ul><li>Create Example code</li>
+			<li>Log Issues</li>
+			<li>Submit PRs for open issues</li>
+			<li>All on github https://github.com/w3c/aria-practices</li></ul>
+			</section>
+<section>
+<h2>More Information</h2>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/">ARIA 1.1 (Working Draft)</a></p>
+<p><a href="https://www.w3.org/TR/wai-aria-practices-1.1/">ARIA 1.1 Authoring Practices(Working Draft)</a></p>
+<p><a href="https://www.w3.org/TR/graphics-aria-1.0/">WAI-ARIA Graphics Module 1.0 (Working Draft)</a></p>
+<p><a href="https://www.w3.org/TR/dpub-aria-1.0/">Digital Publishing ARIA 1.0 Module (Working Draft)</a></p>
+</section>			
+			<section>
+<h2>Thanks</h2>
+<h3>Questions?</h3>
+<a href="https://twitter.com/jnurthen">@jnurthen</a>
+</section>
+	</div>
+	<div class="copyright" aria-hidden="true">
+	<span class="copyrighttext">
+	</span>
+	</div>
+	</div>
+
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+
+		// Full list of configuration options available at:
+		// https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+		controls: true,
+		progress: true,
+		history: true,
+		center: true,
+		slideNumber: true,
+		overview: true,
+		transition: 'zoom-in',
+		width: 1280,
+		height: 720,
+		//viewDistance: 1,				// none/fade/slide/convex/concave/zoom
+
+		// Optional reveal.js plugins
+		dependencies: [
+			{src: 'lib/js/classList.js', condition: function () {
+				return !document.body.classList;
+			}},
+			{src: 'plugin/markdown/marked.js', condition: function () {
+				return !!document.querySelector('[data-markdown]');
+			}},
+			{src: 'plugin/markdown/markdown.js', condition: function () {
+				return !!document.querySelector('[data-markdown]');
+			}},
+			{src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+				hljs.initHighlightingOnLoad();
+			}},
+			{src: 'plugin/zoom-js/zoom.js', async: true},
+			{src: 'plugin/notes/notes.js', async: true},
+			//{ src: 'plugin/details/logifill-details.js', async: true },					
+			{src: 'plugin/live-coding/live-coding.js', async: true, condition: function () {
+				return !!document.body.classList;
+			}}
+		]
+		});
+    </script>
+	</body>
+	</html>
