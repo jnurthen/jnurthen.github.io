@@ -336,7 +336,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
             <li><a href="https://www.w3.org/TR/wai-aria-1.1/#feed">Feed Role</a></li>
 			</ul> 
 			</section>
-			<section>
+			<!--section>
 			<h2 style="text-decoration: line-through;">role="text"</h2>
 			<pre><code><span role="text" aria-label="3 of 5 stars">★★★☆☆</span></code></pre>
 			<pre><code><div class="plan_cost" role="text" aria-label="US$19.99/mo">
@@ -346,7 +346,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 	<span class="per_month">/mo</span>
 </div></code></pre>
 			
-			</section>
+			</section-->
 			<section>
 			<figure>
 			<img height="600px" src="images/tables.jpg" alt="4 Outdoor tables with a few chairs">
@@ -456,11 +456,11 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 <fieldset>
     <legend>Bill has 5 slices of pizza. He gives 2 slices to Mary. How many slices does he have left?</legend>
     <span class="rating">
-      <input type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
-      <input type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4">4</label>
-      <input type="radio" id="rating-3" name="rating" value="3" checked="checked" /><label for="rating-3">3</label>
-      <input type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
-      <input type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+      <input aria-roledescription="slice" type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+      <input aria-roledescription="slice" type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4">4</label>
+      <input aria-roledescription="slice" type="radio" id="rating-3" name="rating" value="3" checked="checked" /><label for="rating-3">3</label>
+      <input aria-roledescription="slice" type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+      <input aria-roledescription="slice" type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
     </span>
   </fieldset>
 			</section>
