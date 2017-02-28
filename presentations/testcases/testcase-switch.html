@@ -50,6 +50,11 @@
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
     right: 0px; 
 }
+#myonoffswitch:focus + .onoffswitch-label
+{
+    border:2px solid #333333;
+}
+
 </style>
 </head>
 <body>
@@ -61,4 +66,6 @@
         <span class="onoffswitch-switch"></span>
     </label>
     
-</div></body>
+</div>
+<p>Code based on https://proto.io/freebies/onoff/</p>
+<p>Fixes made for accessibility support</p></body>

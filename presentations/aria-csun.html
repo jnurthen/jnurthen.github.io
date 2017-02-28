@@ -97,14 +97,14 @@
 			<h2>CSUN 2017</h2>
 			<p>March 1, 2017</p>
 			<p><a style="color:#FFFFFF;" href="mailto:james.nurthen@oracle.com">James Nurthen</a></p>
-            <p><a href="https://jnurthen.github.io/presentations/aria-11.html#/">https://jnurthen.github.io/presentations/aria-csun.html#/</a></p>
+            <p><a href="https://jnurthen.github.io/presentations/aria-csun.html#/">https://jnurthen.github.io/presentations/aria-csun.html#/</a></p>
 			<p>Twitter: <a href="https://twitter.com/jnurthen">@jnurthen</a></p>
 		    </section>
 			<section>
 			<H1>About Me</H1>
 			<ul><li>Worked at Oracle for a long time....</li>
-			<li>Accessibility for 10+ years</li>
-			<li>W3C ARIA and WCAG working groups</li>
+			<li>Accessibility for 15+ years</li>
+			<li>W3C ARIA and AG working groups</li>
 			<li>Co-Editor of ARIA Authoring Practices Guide</li>
 			</section>
 			<section>
@@ -295,6 +295,12 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<section>
 			<h2>role="none"</h2>
 			<p>= <code class="livecoding xml larger" contenteditable data-trim>role="presentation"</code>
+			<div>Remember - just like role=presentation, don't use it on anything that takes focus</div>
+			</section>
+			<section>
+				<video controls>
+				<source data-src="demos/rolenone.mp4" type="video/mp4" />
+				</video>
 			</section>
 			<section>
 			<figure>
@@ -305,9 +311,11 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<section>
 			<h2>role="switch"</h2>
 			<code class="livecoding xml larger" contenteditable data-trim>&lt;div role="switch checkbox" aria-checked="true"></code>
-			<ul>
-			<li>Chrome (support)
-			</ul>
+			</section>
+			<section>
+				<video controls>
+				<source data-src="demos/roleswitch.mp4" type="video/mp4" />
+				</video>
 			</section>
 			<section>
 			<H1>Equivalents to HTML roles</H1>
@@ -367,6 +375,11 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 &lt;/div></code></pre>
 			</section>
 			<section>
+				<video controls>
+				<source data-src="demos/roletable.mp4" type="video/mp4" />
+				</video>
+			</section>
+			<section>
 			<h2>And some new Properties</h2>
 			<ul><li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-colcount">aria-colcount</a></li>
 			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-colindex">aria-colindex</a></li>
@@ -376,8 +389,11 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<li><a href="https://www.w3.org/TR/wai-aria-1.1/#aria-rowspan">aria-rowspan</a></li>
 			</ul>
 			<p>Also - new magic value of aria-colcount, aria-rowcount & aria-setsize of -1</p>
-			<ul><li>Chrome</li>
-			</ul>
+
+			</section>
+			<section>
+			<h2>Implementations</h2>
+			<p>Chrome</p>
 			</section>
 			<section>
 			<h2>Comboboxes</h2>
@@ -522,16 +538,17 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<h1>What is next?</h1>
 			</section>
 			<section>
-			<h1>ARIA 2.0</h1>
+			<h2>ARIA 1.2</h2>
+			<h2>ARIA 2.0?</h2>			
 			<h2>Design Patterns</h2>
-			<h2>Potentially integrating (some) of the Modules</h2>
+			<h2>Other stuff....</h2>
 			</section>
 			<section>
 			<h1>Authoring Practices Guide (APG)</h1>
-			<ul><li>Integrate old Primer (where still relevant)</li>
+			<ul><li>Strip out old content</li>
 			<li>Review all the Design Patterns</li>
 			<li>Create Hosted (vanilla) examples for all design patterns (help needed!!)</li>
-			<li>Fix anything incorrect</li></ul>
+			<li>Review and re-write all old content.</li></ul>
 			</section>
 			<section>
 			<h1>Authoring Practices Guide (APG)</h1>
@@ -539,7 +556,8 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<ul><li>Create Example code</li>
 			<li>Log Issues</li>
 			<li>Submit PRs for open issues</li>
-			<li>All on github https://github.com/w3c/aria-practices</li></ul>
+			<li>All on github https://github.com/w3c/aria-practices</li>
+			<li>Please look in Editor's Draft before logging issues</li></ul>
 			</section>
 <section>
 <h2>More Information</h2>
