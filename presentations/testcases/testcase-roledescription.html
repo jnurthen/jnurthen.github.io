@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Testcase for aria-roledescription</title>
+<style>
+			.rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:15em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:100%;
+    line-height:1.2;
+    color:#ddd;
+	opacity: 0.1;
+}
+
+.rating:not(:checked) > label:before {
+    content: url('../images/Pizza_slice.png');
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+	opacity: 1;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+   /* color: gold;*/
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+			</style>
+</head>
+<body>
+   <a href="../aria-csun.html">back to presentation</a>
+<fieldset>
+    <legend>Bill has 5 slices of pizza. He gives 2 slices to Mary. How many slices does he have left?</legend>
+    <span class="rating">
+      <input aria-roledescription="slice" type="radio" id="rating-5" name="rating" value="5" /><label for="rating-5">5</label>
+      <input aria-roledescription="slice" type="radio" id="rating-4" name="rating" value="4" /><label for="rating-4">4</label>
+      <input aria-roledescription="slice" type="radio" id="rating-3" name="rating" value="3" checked="checked" /><label for="rating-3">3</label>
+      <input aria-roledescription="slice" type="radio" id="rating-2" name="rating" value="2" /><label for="rating-2">2</label>
+      <input aria-roledescription="slice" type="radio" id="rating-1" name="rating" value="1" /><label for="rating-1">1</label>
+    </span>
+  </fieldset>
+</body>
