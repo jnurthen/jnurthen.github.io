@@ -511,16 +511,27 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<img class="stretch" src="images/aria-errormessage-error.png" alt="Form Field with hint text and an error message showing">
 			</section>
 			<section>
-			<h1>Some other miscellaneous changes</h1>
-			<ul><li>aria-modal</li>
-			<li>aria-keyshortcuts</li>
-			<li>aria-details</li>
-			<li>aria-placeholder</li>
-			<li>aria-haspopup (new values)</li>
-			<li>aria-current</li>
-				<ul><li>Chrome (windows, linux), Webkit (MacOS, iOS), JAWS18
+			<h2>aria-modal</h2>
+			<p>Allows to specify that a dialog is modal or not modal.</p>
+			<p>A well behaving screen reader will "hide" the rest of the content on the page if modal</p>
+			</section>
+			<section>
+			<h2>aria-keyshortcuts</h2>
+			<p>Allows to specify what are the shortcut to navigate to or activate something</p>
+			<p>Doesn't actually implement the shortcut</p>
+			</section>
+            <section>
+			<h2>aria-current</h2>
+			<p>specifies that this is the current "thing" in the superset of "things"
+			<ul><li>Chrome (windows, linux), Webkit (MacOS, iOS), JAWS18
 				<li>https://ljwatson.github.io/design-patterns/aria-current/
 				</ul>
+			</section>
+			<section>
+			<h1>Some other miscellaneous changes</h1>
+			<ul><li>aria-details</li>
+			<li>aria-placeholder</li>
+			<li>aria-haspopup (new values)</li>		
 			<li>aria-readonly, aria-orientation, aria-posinset, aria-setsize (on more roles)</li>
 			<li><del>aria-grabbed, aria-dropeffect, (aria-describedat)</del></li>
 			</section>
@@ -567,7 +578,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			</section>
 <section>
 <h2>More Information</h2>
-<p><a href="https://www.w3.org/TR/wai-aria-1.1/">ARIA 1.1 (Candidtate Recommendation)</a></p>
+<p><a href="https://www.w3.org/TR/wai-aria-1.1/">ARIA 1.1 (Candidate Recommendation)</a></p>
 <p><a href="https://www.w3.org/TR/wai-aria-practices-1.1/">ARIA 1.1 Authoring Practices(Working Draft)</a></p>
 <p><a href="https://www.w3.org/TR/graphics-aria-1.0/">WAI-ARIA Graphics Module 1.0 (Working Draft)</a></p>
 <p><a href="https://www.w3.org/TR/dpub-aria-1.0/">Digital Publishing ARIA 1.0 Module (Candidate Recommendation)</a></p>
