@@ -296,6 +296,8 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<h2>role="none"</h2>
 			<p>= <code class="livecoding xml larger" contenteditable data-trim>role="presentation"</code>
 			<div>Remember - just like role=presentation, don't use it on anything that takes focus</div>
+				<p><a href="testcases/testcase-none.html">Testcase</a></p>
+
 			</section>
 			<section>
 				<video controls>
@@ -311,7 +313,8 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<section>
 			<h2>role="switch"</h2>
 			<code class="livecoding xml larger" contenteditable data-trim>&lt;div role="switch checkbox" aria-checked="true"></code>
-			</section>
+							<p><a href="testcases/testcase-switch.html">Testcase</a></p>
+</section>
 			<section>
 				<video controls>
 				<source data-src="demos/roleswitch.mp4" type="video/mp4" />
@@ -323,6 +326,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			<dt><code class="larger">role="searchbox"</code></dt><dd><code class="larger">input[type="search"]</code></dd>
 			<dt><code class="larger">role="figure"</code></dt><dd><code class="larger">figure</code></dd>
 			</dl>
+			<p>Note - we already had role=definiton in ARIA 1.0</p>
 			</section>
 			<section>
 			<figure>
@@ -373,6 +377,8 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
     &lt;div role="cell">Cell 2&lt;/div>
   &lt;/div>
 &lt;/div></code></pre>
+				<p><a href="testcases/testcase-table.html">Testcase</a></p>
+
 			</section>
 			<section>
 				<video controls>
@@ -393,7 +399,7 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			</section>
 			<section>
 			<h2>Implementations</h2>
-			<p>Chrome</p>
+			<p>Chrome??</p>
 			</section>
 			<section>
 			<h2>Comboboxes</h2>
@@ -406,6 +412,12 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
     <li role="option" id="selected_option">Zoom</li>
 </ul></code></pre>
 <div class="float-left fragment"><img src="images/combo-date.png" alt="Combo box with A date Dialog popup"></div><div class="float-left fragment"><img src="images/combo-dialog.png" alt="Combo box with textbox search within the popup"></div>
+			</section>
+			<section>
+			<p>CAUTION: Changes are more complex than this</p>
+			<p>Recommend to read <a href="https://www.w3.org/TR/wai-aria-1.1/#h-combobox">Authoring practices guide</a> carefully.
+			</p>
+            <p>Also - Bryan Garaventa has an excellent <a href="http://www.ssbbartgroup.com/blog/differences-aria-1-0-1-1-changes-rolecombobox/">Blog</a> on this subject </p>
 			</section>
 			<section>
 			<figure>
@@ -532,9 +544,10 @@ onkeydown="myButtonEventHandler(event)" onclick="myButtonEventHandler(event)">
 			</section>
 			<section>
 			<h1>Some other miscellaneous changes</h1>
-			<ul><li>aria-details</li>
+			<ul><li>aria-activedescendent - on more roles and no longer has to be a descendent</li>
+			<li>aria-details</li>
 			<li>aria-placeholder</li>
-			<li>aria-haspopup (new values)</li>		
+			<li>aria-haspopup - new values specifying what type of popup</li>		
 			<li>aria-readonly, aria-orientation, aria-posinset, aria-setsize (on more roles)</li>
 			<li><del>aria-grabbed, aria-dropeffect, (aria-describedat)</del></li>
 			</section>
