@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AccName: label vs contents — F2F Session</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Reveal.js from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.5.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@4.5.0/dist/theme/solarized.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h1>AccName: label vs contents</h1>
+        <p>F2F Session — 1 hour</p>
+        <p>Chair: jnurthen</p>
+      </section>
+
+      <section>
+        <h2>Objectives</h2>
+        <ul>
+          <li>Clarify whether AccName should split "label/name" from descendant content (#2623)</li>
+          <li>Revisit whether labels should override content and define precedence (#2569)</li>
+          <li>Produce decisions or concrete next steps (owners, tests, timelines)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Agenda (60m)</h2>
+        <ol>
+          <li>0:00–0:05 Welcome & objectives</li>
+          <li>0:05–0:30 Issue #2623: split name/label from contents (25m)</li>
+          <li>0:30–0:32 Transition (2m)</li>
+          <li>0:32–0:57 Issue #2569: label overrides content (25m)</li>
+          <li>0:57–1:00 Wrap-up: decisions, owners, next steps (3m)</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Issue #2623 — Overview</h2>
+        <p>Should AccName split name/label from contents (descendent text node contents)?</p>
+        <ul>
+          <li>Current AccName concatenates descendant text and generated content</li>
+          <li>Some engines expose generated content as separate nodes</li>
+          <li>AT use cases differ</li>
+        </ul>
+        <p>Options:</p>
+        <ol>
+          <li>Keep single computed AccName; add guidance/clarity</li>
+          <li>Introduce explicit dual value (name/label vs contents)</li>
+          <li>Hybrid: keep computed name but expose structured parts</li>
+        </ol>
+        <p>Examples & snippets: <a href="./snippets.md">snippets.md</a></p>
+      </section>
+
+      <section>
+        <h2>Issue #2569 — Overview</h2>
+        <p>"the age old question about whether a label should override content"</p>
+        <ul>
+          <li>Precedence for aria-label / aria-labelledby vs content</li>
+          <li>Need clear precedence rules and author guidance</li>
+        </ul>
+        <p>Examples: <a href="./snippets.md#issue-2569-examples">snippets.md</a></p>
+      </section>
+
+      <section>
+        <h2>Decision capture & next steps</h2>
+        <ul>
+          <li>Record decision & rationale</li>
+          <li>Assign owners: spec editor, WPT author, implementer contact</li>
+          <li>Suggested timeline: prototype/WPTs within 6 weeks</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Links & pre-reads</h2>
+        <ul>
+          <li><a href="./snippets.md">Example snippets</a></li>
+          <li><a href="./tests.md">Test outlines & WPT skeletons</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@4.5.0/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      history: true
+    });
+  </script>
+</body>
+</html>
