@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gen AI skills for ARIA work – ARIA WG, TPAC 2026</title>
+<style>
+:root {
+  --bg: #F7F6F2; --surface: #FFFDF8; --surface-2: #EFECE4; --border: #D6D1C4;
+  --text: #14213D; --muted: #4A5568; --accent: #A84A18; --link: #1D4ED8;
+  --dark: #14213D; --dark-text: #F7F6F2; --dark-accent: #F2A65A; --dark-muted: #DCE3EE;
+  --dark-card: #1F2E50; --dark-border: #3A4A6B;
+  --focus: #1D4ED8;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #101828; --surface: #182235; --surface-2: #1F2B42; --border: #3A4A6B;
+  --text: #F3F4F6; --muted: #C9D3E3; --accent: #F2A65A; --link: #93C5FD;
+  --dark: #0B1220; --dark-text: #F3F4F6; --dark-accent: #F2A65A; --dark-muted: #DCE3EE;
+  --dark-card: #1F2E50; --dark-border: #3A4A6B;
+  --focus: #93C5FD; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #101828; --surface: #182235; --surface-2: #1F2B42; --border: #3A4A6B;
+  --text: #F3F4F6; --muted: #C9D3E3; --accent: #F2A65A; --link: #93C5FD;
+  --dark: #0B1220; --dark-text: #F3F4F6; --dark-accent: #F2A65A; --dark-muted: #DCE3EE;
+  --dark-card: #1F2E50; --dark-border: #3A4A6B;
+  --focus: #93C5FD; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; font-size: 1.125rem; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.125rem; line-height: 1.6;
+}
+code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+a { color: var(--link); }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.skip { position: absolute; left: 1rem; top: -4rem; background: var(--surface); padding: .5rem 1rem; z-index: 10; }
+.skip:focus { top: 1rem; }
+.wrap { max-width: 64rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap > *, .cols > *, .grid > * { min-width: 0; }
+.table-scroll { overflow-x: auto; }
+header.doc { background: var(--dark); color: var(--dark-text); padding: 3rem 0 2.5rem; }
+header.doc .eyebrow { color: var(--dark-accent); }
+header.doc h1 { font-size: clamp(2.25rem, 6vw, 3.75rem); line-height: 1.1; margin: .5rem 0 1rem; }
+header.doc p { color: var(--dark-muted); margin: .25rem 0; }
+header.doc a { color: var(--dark-accent); }
+.eyebrow { font-size: .875rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0; }
+nav.toc { padding: 2rem 0 0; }
+nav.toc h2 { font-size: 1.25rem; margin: 0 0 .5rem; }
+nav.toc ol { margin: 0; padding-left: 1.5rem; columns: 2 18rem; column-gap: 2rem; }
+nav.toc li { break-inside: avoid; margin-bottom: .25rem; }
+main section.slide {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 1rem;
+  padding: 2rem; margin: 2rem 0; scroll-margin-top: 1rem;
+}
+main section.slide.dark { background: var(--dark); color: var(--dark-text); border-color: var(--dark); }
+main section.slide.dark .eyebrow { color: var(--dark-accent); }
+main section.slide.dark .muted, main section.slide.dark .card p { color: var(--dark-muted); }
+main section.slide.dark a { color: var(--dark-accent); }
+.slide-num { font-size: .875rem; color: var(--muted); margin: 0 0 .25rem; }
+.slide.dark .slide-num { color: var(--dark-muted); }
+section.slide h2 { font-size: clamp(1.6rem, 3.5vw, 2.25rem); line-height: 1.2; margin: .35rem 0 1.25rem; }
+.muted { color: var(--muted); }
+.lead { font-size: 1.25rem; }
+.grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); padding: 0; margin: 1rem 0; list-style: none; }
+.card { background: var(--surface-2); border: 1px solid var(--border); border-radius: .75rem; padding: 1.25rem; }
+.slide.dark .card { background: var(--dark-card); border-color: var(--dark-border); }
+.card h3 { font-size: 1.15rem; margin: 0 0 .4rem; }
+.card p { margin: 0; color: var(--muted); }
+.card.highlight { border: 2px solid var(--accent); }
+.slide.dark .card.highlight { border-color: var(--dark-accent); }
+.card.inverse { background: var(--dark); color: var(--dark-text); border-color: var(--dark); }
+.card.inverse h3 { color: var(--dark-accent); }
+.card.inverse p { color: var(--dark-muted); }
+.slide.dark .card h3 { color: var(--dark-accent); }
+ol.steps { counter-reset: none; }
+.cols { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); align-items: start; }
+pre.prompt { white-space: pre-wrap; background: var(--surface-2); border: 1px solid var(--border); border-radius: .75rem; padding: 1.25rem; margin: .5rem 0 0; font-size: 1rem; line-height: 1.55; }
+pre.prompt.good { border: 2px solid var(--accent); }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+caption { text-align: left; font-weight: 700; padding-bottom: .5rem; }
+th, td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+thead th { border-bottom: 2px solid var(--text); }
+.statement { font-size: 1.35rem; font-weight: 700; margin: 1.5rem 0 0; }
+ul.mono, ul.mono li { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 1rem; }
+footer.doc { padding: 1rem 0 3rem; color: var(--muted); font-size: .95rem; }
+@media print {
+      section.slide { break-inside: avoid; }
+  .skip, nav.toc { display: none; }
+}
+.wide { grid-column: span 2; }
+@media (max-width: 40rem) { .wide { grid-column: auto; } }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to slides</a>
+
+<header class="doc">
+  <div class="wrap">
+    <p class="eyebrow">ARIA WG · TPAC 2026</p>
+    <h1>Gen AI skills for ARIA work</h1>
+    <p>Tips, prompts and reusable skills from real WG tasks</p>
+    <p>James Craig and James Nurthen · <a href="https://github.com/w3c/aria/issues/2876">w3c/aria#2876</a></p>
+  </div>
+</header>
+
+<div class="wrap">
+<nav class="toc" aria-labelledby="toc-h">
+  <h2 id="toc-h">Slides</h2>
+  <ol>
+    <li><a href="#goal">Raise the floor, not show off the ceiling</a></li>
+    <li><a href="#tip-context">Give it more context than you think it needs</a></li>
+    <li><a href="#tip-anatomy">What that prompt tells the agent</a></li>
+    <li><a href="#cs-problem">Accessibility tests that wpt.fyi couldn’t find</a></li>
+    <li><a href="#cs-result">What it labelled</a></li>
+    <li><a href="#cs-mistake">It also labelled conformance-checkers/, and CI caught it</a></li>
+    <li><a href="#cs-skill">When a task will come back, turn it into a skill</a></li>
+    <li><a href="#pr-what">Reviewing a w3c/aria PR the way an editor would</a></li>
+    <li><a href="#pr-output">Design choices worth copying</a></li>
+    <li><a href="#recap">Things to try this week</a></li>
+    <li><a href="#own-loop">One way to do it: the draft PR loop</a></li>
+    <li><a href="#discuss">Where should shared skills live?</a></li>
+  </ol>
+</nav>
+
+<main id="main">
+
+<section class="slide" id="goal" aria-labelledby="goal-h">
+  <p class="slide-num">Slide 2 of 13</p>
+  <p class="eyebrow">The next 30 minutes</p>
+  <h2 id="goal-h">Raise the floor, not show off the ceiling</h2>
+  <div class="table-scroll"><table>
+    <caption>Session agenda</caption>
+    <thead><tr><th scope="col">Time</th><th scope="col">Part</th><th scope="col">Who</th></tr></thead>
+    <tbody>
+      <tr><td>2 min</td><td>Why we’re here</td><td>James N</td></tr>
+      <tr><td>15 min</td><td>Worked example: labelling a11y tests in WPT, with tips</td><td>James C</td></tr>
+      <tr><td>5 min</td><td>Second example: the ARIA PR review skill</td><td>James N</td></tr>
+      <tr><td>8 min</td><td>Discussion: where shared skills should live</td><td>Everyone</td></tr>
+    </tbody>
+  </table></div>
+  <p class="muted"><strong>Out of scope:</strong> whether and how the WG should use AI at all. That’s <a href="https://github.com/w3c/aria/issues/2796">w3c/aria#2796</a>.</p>
+</section>
+
+<section class="slide" id="tip-context" aria-labelledby="tip-context-h">
+  <p class="slide-num">Slide 3 of 13</p>
+  <p class="eyebrow">Tip 1</p>
+  <h2 id="tip-context-h">Give it more context than you think it needs</h2>
+  <div class="cols">
+    <div>
+      <h3>Instead of</h3>
+      <pre class="prompt"><code>make some test cases for aria-foo</code></pre>
+    </div>
+    <div class="wide">
+      <h3>Try</h3>
+      <pre class="prompt good"><code>I’m a member of the ARIA WG, and I need to develop some test cases for aria-foo for this task issue &lt;GitHub issue link&gt;. We’re in my local copy of the WPT repository; existing accessibility tests include those in /accname, /wai-aria, /html-aam and more. There is a sibling repo at ../wpt-metadata with an identical hierarchy and META.yml files listing keywords/labels, including “accessibility”. Search that repo to understand which tests already cover accessibility. Note that aria-foo only became testable recently with WPT extensions including getAccessibilityProperties (see an example test in ./wai-aria/pressed) and the aamtests in ./core-aam/aamtests/. Read the GitHub issue, local docs and related tests. Start in planning mode before making any changes.</code></pre>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="tip-anatomy" aria-labelledby="tip-anatomy-h">
+  <p class="slide-num">Slide 4 of 13</p>
+  <p class="eyebrow">Tip 1, unpacked</p>
+  <h2 id="tip-anatomy-h">What that prompt tells the agent</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th scope="col">It needs to know</th><th scope="col">The prompt says</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Who you are</th><td>A member of the ARIA WG</td></tr>
+      <tr><th scope="row">The task</th><td>A link to the GitHub issue</td></tr>
+      <tr><th scope="row">Where it is working</th><td>Your local WPT checkout and its a11y test folders</td></tr>
+      <tr><th scope="row">Related repos</th><td>../wpt-metadata and its META.yml labels</td></tr>
+      <tr><th scope="row">What’s too new for it to know</th><td>getAccessibilityProperties and the aamtests</td></tr>
+      <tr><th scope="row">An example to copy</th><td>./wai-aria/pressed</td></tr>
+      <tr><th scope="row">How to start</th><td>Read first, plan before changing anything</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="slide" id="cs-problem" aria-labelledby="cs-problem-h">
+  <p class="slide-num">Slide 5 of 13</p>
+  <p class="eyebrow">Worked example · <a href="https://github.com/web-platform-tests/wpt-metadata/pull/9537">wpt-metadata#9537</a></p>
+  <h2 id="cs-problem-h">Accessibility tests that wpt.fyi couldn’t find</h2>
+  <p class="lead muted">Many accessibility tests had no accessibility/a11y label in wpt-metadata, so they didn’t show up under <a href="https://wpt.fyi/results/?label=master&amp;label=experimental&amp;aligned&amp;q=label%3Aaccessibility">label:accessibility on wpt.fyi</a>.</p>
+  <ul class="grid">
+    <li class="card"><h3>Detect</h3><p>Find tests using get_computed_role / get_computed_label, ARIA test helpers, or ARIA/role file names</p></li>
+    <li class="card"><h3>Label</h3><p>Whole directory where the suite is all accessibility; single files everywhere else</p></li>
+    <li class="card"><h3>Follow convention</h3><p>Match how dpub-aam/ is already labelled; skip manual tests, which produce no CI results</p></li>
+  </ul>
+</section>
+
+<section class="slide" id="cs-result" aria-labelledby="cs-result-h">
+  <p class="slide-num">Slide 6 of 13</p>
+  <p class="eyebrow">Worked example · wpt-metadata#9537</p>
+  <h2 id="cs-result-h">What it labelled</h2>
+  <div class="cols">
+    <div>
+      <h3>Whole directory</h3>
+      <p><code>core-aam/</code></p>
+      <p class="muted">The Core-AAM suite, a sibling of the already-labelled dpub-aam/</p>
+    </div>
+    <div class="wide">
+      <h3>Single files inside non-a11y folders</h3>
+      <ul class="mono">
+        <li>custom-elements/</li>
+        <li>shadow-dom/reference-target/tentative/</li>
+        <li>html/interaction/focus/focusgroup/tentative/</li>
+        <li>html/semantics/menu/tentative/</li>
+        <li>html/semantics/permission-element/</li>
+        <li>html/semantics/popovers/</li>
+        <li>html/semantics/forms/the-select-element/customizable-select/</li>
+        <li>dom/nodes/moveBefore/</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide dark" id="cs-mistake" aria-labelledby="cs-mistake-h">
+  <p class="slide-num">Slide 7 of 13</p>
+  <p class="eyebrow">Tip 2 · What went wrong</p>
+  <h2 id="cs-mistake-h">It also labelled conformance-checkers/, and CI caught it</h2>
+  <ol class="grid steps">
+    <li class="card"><h3>1 · Agent</h3><p>Adds labels to three conformance-checkers/ folders</p></li>
+    <li class="card"><h3>2 · CI</h3><p>Path validation fails: those are support files for an external validator, not tests wpt.fyi runs</p></li>
+    <li class="card"><h3>3 · Fix</h3><p>A second commit drops those labels; the PR merges</p></li>
+  </ol>
+  <p class="statement">Check the output against something real: CI, the linter, wpt.fyi. “Looks right” isn’t a check.</p>
+</section>
+
+<section class="slide" id="cs-skill" aria-labelledby="cs-skill-h">
+  <p class="slide-num">Slide 8 of 13</p>
+  <p class="eyebrow">Tip 3</p>
+  <h2 id="cs-skill-h">When a task will come back, turn it into a skill</h2>
+  <ul class="grid">
+    <li class="card"><h3><code>SKILL.md</code></h3><p>The judgment: what counts as an accessibility test, the labelling conventions, the exceptions (manual tests, conformance-checkers/)</p></li>
+    <li class="card"><h3><code>script.py</code></h3><p>The mechanics: the repeatable search, so the agent doesn’t rediscover it (and spend tokens) every time</p></li>
+  </ul>
+  <p class="lead muted">Labels drift as new tests land. Next time, anyone can rerun it. Where should it live? <a href="https://github.com/web-platform-tests/interop-accessibility/issues/256">interop-accessibility#256</a></p>
+</section>
+
+<section class="slide" id="pr-what" aria-labelledby="pr-what-h">
+  <p class="slide-num">Slide 9 of 13</p>
+  <p class="eyebrow">Second example · ARIA PR review skill</p>
+  <h2 id="pr-what-h">Reviewing a w3c/aria PR the way an editor would</h2>
+  <ol class="grid steps">
+    <li class="card"><h3>1 · Gather</h3><p>Script pulls the PR, diff, linked issues, every suite spec and the WPT index</p></li>
+    <li class="card"><h3>2 · Classify</h3><p>Editorial or normative? Affects authors, user agents or AT?</p></li>
+    <li class="card"><h3>3 · Style</h3><p>ARIA and W3C style guides, on changed lines only</p></li>
+    <li class="card highlight"><h3>4 · Cross-spec</h3><p>Search every suite spec and ARIA in HTML for contradictions and needed follow-ups</p></li>
+    <li class="card"><h3>5 · Tests</h3><p>Find existing WPT and validator tests; draft missing ones as .tentative</p></li>
+    <li class="card"><h3>6 · Process</h3><p>Labels, ACT, APG, MDN, browser bugs, consensus, review count</p></li>
+  </ol>
+</section>
+
+<section class="slide" id="pr-output" aria-labelledby="pr-output-h">
+  <p class="slide-num">Slide 10 of 13</p>
+  <p class="eyebrow">Second example · ARIA PR review skill</p>
+  <h2 id="pr-output-h">Design choices worth copying</h2>
+  <div class="cols">
+    <div class="card">
+      <h3>What you get</h3>
+      <ul>
+        <li>A verdict and blocking issues first</li>
+        <li>A cross-spec table, one row per spec</li>
+        <li>Style fixes as suggestion blocks</li>
+        <li>Existing tests, plus drafts of missing ones</li>
+        <li>A process checklist</li>
+        <li>Paste-ready GitHub review comments</li>
+      </ul>
+    </div>
+    <dl style="margin:0">
+      <dt><strong>WG knowledge lives in reference files</strong></dt>
+      <dd class="muted" style="margin:0 0 1rem">style.md, cross-spec.md, testing.md, process.md</dd>
+      <dt><strong>A script does the fetching</strong></dt>
+      <dd class="muted" style="margin:0 0 1rem">Stays inside GitHub’s anonymous API limit</dd>
+      <dt><strong>It says what it checked vs inferred</strong></dt>
+      <dd class="muted" style="margin:0 0 1rem">No silent “all clear”</dd>
+      <dt><strong>It’s calibrated</strong></dt>
+      <dd class="muted" style="margin:0">Style is almost never blocking</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="slide" id="recap" aria-labelledby="recap-h">
+  <p class="slide-num">Slide 11 of 13</p>
+  <p class="eyebrow">Recap</p>
+  <h2 id="recap-h">Things to try this week</h2>
+  <ul class="grid">
+    <li class="card"><h3>More context, not less</h3><p>Role, task link, repos, examples</p></li>
+    <li class="card"><h3>Name what’s too new</h3><p>New APIs and specs it can’t know yet</p></li>
+    <li class="card"><h3>Plan before changing</h3><p>Review the approach, then let it edit</p></li>
+    <li class="card"><h3>Check against something real</h3><p>CI, linters, wpt.fyi, the spec text</p></li>
+    <li class="card"><h3>Make repeat tasks skills</h3><p>Knowledge in reference files, mechanics in scripts</p></li>
+    <li class="card inverse"><h3>You own what you submit</h3><p>The agent drafts; you review and sign off</p></li>
+  </ul>
+</section>
+
+<section class="slide" id="own-loop" aria-labelledby="own-loop-h">
+  <p class="slide-num">Slide 12 of 13</p>
+  <p class="eyebrow">You own what you submit</p>
+  <h2 id="own-loop-h">One way to do it: the draft PR loop</h2>
+  <ol class="grid steps">
+    <li class="card"><h3>1 · Draft</h3><p>The agent files a draft PR against the ARIA or WPT issue</p></li>
+    <li class="card"><h3>2 · Self-review</h3><p>You review the diff on GitHub; the agent adds follow-up commits from your review</p></li>
+    <li class="card"><h3>3 · Ready</h3><p>Only you move it from Draft to Ready for review</p></li>
+    <li class="card inverse"><h3>4 · Human review</h3><p>Other reviewers, often starting with their own agentic first pass</p></li>
+  </ol>
+  <p class="muted">It depends on your workflow. Where GitHub and AI tools are built into the IDE (Xcode, Visual Studio), the loop may look different.</p>
+</section>
+
+<section class="slide dark" id="discuss" aria-labelledby="discuss-h">
+  <p class="slide-num">Slide 13 of 13</p>
+  <p class="eyebrow">Discussion · 8 min</p>
+  <h2 id="discuss-h">Where should shared skills live?</h2>
+  <ul class="grid">
+    <li class="card"><h3><code>interop-accessibility</code></h3><p>Proposed in <a href="https://github.com/web-platform-tests/interop-accessibility/issues/256">#256</a>; close to the WPT work</p></li>
+    <li class="card"><h3><code>w3c/aria</code></h3><p>Close to spec editing and PR review</p></li>
+    <li class="card highlight"><h3>One shared repo</h3><p>Both groups link to it; no duplicate copies</p></li>
+  </ul>
+  <h3>Also</h3>
+  <ul class="muted">
+    <li>Contribution and licensing for shared prompts and skills</li>
+    <li>What’s your review loop? Should PRs say when an agent helped?</li>
+    <li>A hands-on follow-up on a regular WG call in 6–8 weeks?</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="doc">
+  <p>ARIA WG · TPAC 2026 · Gen AI skills · <a href="https://github.com/w3c/aria/issues/2876">w3c/aria#2876</a></p>
+</footer>
+</div>
+</body>
+</html>
