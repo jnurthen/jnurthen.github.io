@@ -93,6 +93,27 @@ footer.doc { padding: 1rem 0 3rem; color: var(--muted); font-size: .95rem; }
 }
 .wide { grid-column: span 2; }
 @media (max-width: 40rem) { .wide { grid-column: auto; } }
+button { font: inherit; font-size: 1rem; padding: .5rem 1rem; border-radius: .5rem; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); cursor: pointer; }
+button:hover { border-color: var(--accent); }
+.start-row { margin-top: 1.25rem !important; display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.start-show { background: var(--dark-accent); color: var(--dark); border-color: var(--dark-accent); font-weight: 700; }
+.start-row .hint { font-size: .95rem; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.show-controls { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: .75rem; padding: .5rem; z-index: 20; box-shadow: 0 4px 16px rgba(0,0,0,.18); }
+.show-controls .count { font-variant-numeric: tabular-nums; padding: 0 .5rem; font-size: 1rem; }
+html.presenting { font-size: clamp(16px, 1.45vw, 26px); }
+html.presenting nav.toc, html.presenting footer.doc, html.presenting .skip, html.presenting .start-row { display: none; }
+html.presenting .wrap { max-width: none; padding-left: 0; padding-right: 0; }
+html.presenting main section.slide, html.presenting header.doc {
+  margin: 0; border: none; border-radius: 0; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 2rem max(6vw, 16px) 6rem;
+}
+html.presenting header.doc .wrap { padding: 0; }
+html.presenting header.doc h1 { font-size: 4.5rem; }
+html.presenting section.slide h2 { font-size: 2.5rem; }
+html.presenting section.slide > * { max-width: 72rem; width: 100%; }
+[hidden] { display: none !important; }
 </style>
 </head>
 <body>
@@ -105,6 +126,7 @@ footer.doc { padding: 1rem 0 3rem; color: var(--muted); font-size: .95rem; }
     <h1>Gen AI skills for ARIA work</h1>
     <p>Tips, prompts and reusable skills from real WG tasks</p>
     <p>James Craig and James Nurthen · <a href="https://github.com/w3c/aria/issues/2876">w3c/aria#2876</a></p>
+    <p class="start-row"><button type="button" class="start-show" id="start-show">Start slideshow</button> <span class="hint">Arrow keys or Page Up/Down to move, Esc to exit</span></p>
   </div>
 </header>
 
@@ -334,5 +356,87 @@ footer.doc { padding: 1rem 0 3rem; color: var(--muted); font-size: .95rem; }
   <p>ARIA WG · TPAC 2026 · Gen AI skills · <a href="https://github.com/w3c/aria/issues/2876">w3c/aria#2876</a></p>
 </footer>
 </div>
+<nav class="show-controls" aria-label="Slideshow controls" hidden>
+  <button type="button" id="show-prev">Previous</button>
+  <span class="count" id="show-count" aria-hidden="true"></span>
+  <button type="button" id="show-next">Next</button>
+  <button type="button" id="show-fs" hidden>Full screen</button>
+  <button type="button" id="show-exit">Exit slideshow</button>
+</nav>
+<p class="visually-hidden" aria-live="polite" id="show-status"></p>
+<script>
+(function () {
+  var root = document.documentElement;
+  var slides = [document.querySelector('header.doc')].concat([].slice.call(document.querySelectorAll('main section.slide')));
+  var controls = document.querySelector('.show-controls');
+  var count = document.getElementById('show-count');
+  var status = document.getElementById('show-status');
+  var startBtn = document.getElementById('start-show');
+  var fsBtn = document.getElementById('show-fs');
+  var current = 0, on = false;
+
+  function heading(el) { return el.querySelector('h1, h2'); }
+  slides.forEach(function (s) { var h = heading(s); if (h) h.setAttribute('tabindex', '-1'); });
+
+  function show(i, announce) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function (s, n) { s.hidden = n !== current; });
+    window.scrollTo(0, 0);
+    var label = 'Slide ' + (current + 1) + ' of ' + slides.length;
+    count.textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('show-prev').disabled = current === 0;
+    document.getElementById('show-next').disabled = current === slides.length - 1;
+    if (announce) status.textContent = label + ': ' + heading(slides[current]).textContent;
+  }
+
+  function start(i) {
+    on = true;
+    root.classList.add('presenting');
+    controls.hidden = false;
+    show(i || 0, false);
+    heading(slides[current]).focus();
+  }
+
+  function stop() {
+    on = false;
+    root.classList.remove('presenting');
+    controls.hidden = true;
+    slides.forEach(function (s) { s.hidden = false; });
+    status.textContent = '';
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {});
+    var h = heading(slides[current]);
+    h.scrollIntoView();
+    h.focus();
+  }
+
+  startBtn.addEventListener('click', function () { start(0); });
+  document.getElementById('show-prev').addEventListener('click', function () { show(current - 1, true); });
+  document.getElementById('show-next').addEventListener('click', function () { show(current + 1, true); });
+  document.getElementById('show-exit').addEventListener('click', stop);
+
+  if (root.requestFullscreen) {
+    fsBtn.hidden = false;
+    fsBtn.addEventListener('click', function () {
+      if (document.fullscreenElement) document.exitFullscreen().catch(function () {});
+      else root.requestFullscreen().catch(function () {});
+    });
+    document.addEventListener('fullscreenchange', function () {
+      fsBtn.textContent = document.fullscreenElement ? 'Exit full screen' : 'Full screen';
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (!on || e.altKey || e.ctrlKey || e.metaKey) return;
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown') { show(current + 1, true); e.preventDefault(); }
+    else if (k === 'ArrowLeft' || k === 'PageUp') { show(current - 1, true); e.preventDefault(); }
+    else if (k === 'Home') { show(0, true); e.preventDefault(); }
+    else if (k === 'End') { show(slides.length - 1, true); e.preventDefault(); }
+    else if (k === 'Escape' && !document.fullscreenElement) { stop(); }
+  });
+
+  if (location.hash === '#slideshow') start(0);
+})();
+</script>
 </body>
 </html>
